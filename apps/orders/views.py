@@ -84,3 +84,16 @@ def create_order(request):
     
     return Response(response_data, status=status.HTTP_201_CREATED)
 
+@api_view(['GET'])
+def store_order(request,store_id):
+    try:
+        store= Store.objects.get(id= store_id)
+    except Store.DoesNotExist:
+        return response(
+            {'error':'store does no exist'},
+            status= status.HTTP_404_NOT_EXIST
+        )
+    orders = Order.objects.filter(store=store).prefetch_related('items')
+    serializer = OrderSerializer(orders, many=True)
+
+    return Response(serializer.data, status= status.HTTP_200_OK)
