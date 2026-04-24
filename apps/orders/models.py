@@ -10,14 +10,14 @@ class Orders(models.Model):
         ('rejected','rejected'),
     )
     status= models.CharField(max_length=20, choices= status_choices,default="pending")
-    created_at = models.models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.store.name} {self.status}"
 
 class OrderItem(models.Model):
-    order = models.models.ForeignKey(Orders, verbose_name="orders", on_delete=models.CASCADE)
-    product = models.models.ForeignKey(Products, verbose_name="products", on_delete=models.CASCADE)
+    order = models.ForeignKey(Orders, verbose_name="orders", on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, verbose_name="products", on_delete=models.CASCADE)
     quantity_requested= models.PositiveIntegerField(default=1)
 
     def __str__(self):
