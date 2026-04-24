@@ -85,7 +85,7 @@ def create_order(request):
     return Response(response_data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
-def store_order(request,store_id):
+def get_store_order(request,store_id):
     try:
         store= Store.objects.get(id= store_id)
     except Store.DoesNotExist:
