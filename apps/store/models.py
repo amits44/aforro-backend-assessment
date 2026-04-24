@@ -11,7 +11,7 @@ class Store(models.Model):
 class Inventory(models.Model):
     store = models.ForeignKey(Store, verbose_name="store", on_delete=models.CASCADE)
     product = models.ForeignKey(Products, verbose_name="product", on_delete=models.CASCADE)
-    quantitu = models.PositiveIntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
 
     class Meta:
         constraints=[
